@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreams And Promise (DAP) - Memecoin Janji Sukses untuk Semua</title>
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #00f2fe;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%2300f2fe" points="0,1000 1000,0 1000,1000"/></svg>') no-repeat center/cover;
+            position: relative;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #00f2fe;
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        /* About */
+        #about {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .about-image {
+            text-align: center;
+        }
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Tokenomics */
+        #tokenomics {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .token-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+        .token-card:hover {
+            transform: translateY(-10px);
+        }
+        .token-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Roadmap */
+        #roadmap {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .roadmap-item {
+            background: rgba(0, 0, 0, 0.5);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            color: #fff;
+        }
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #00f2fe;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .roadmap-item h3 {
+            color: #00f2fe;
+            margin-bottom: 1rem;
+        }
+
+        /* Team */
+        #team {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .team-member {
+            text-align: center;
+            color: #fff;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        /* Contact */
+        #contact {
+            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input, textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 1rem;
+            background: #00f2fe;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #4facfe;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 2rem 0;
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/30/00f2fe/fff?text=DAP" alt="DAP Logo"> Dreams And Promise (DAP)
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Our Promise</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Dreams And Promise (DAP)</h1>
+                <p>Memecoin lahir dari mimpi besar seorang anak: Sukses untuk janji membantu sesama, meski jalan penuh kegagalan.</p>
+                <div id="random-quote" class="quote"></div>
+                <a href="#about" class="cta-button">Discover Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Our Promise: From Dreams to Reality</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A young dreamer started with big visions: Success in crypto to uplift others. Early paths were riddled with failures—lost investments, doubts, setbacks. Yet, unwavering faith in that grand dream fueled the journey: "This promise will lead to triumph, not just for me, but for countless kids needing a hand."</p>
+                    <p>Dreams And Promise (DAP) embodies that resilience. We're building a community where holders are partners in social change. Profits fund education for underprivileged children—turning promises into action. This isn't just a coin; it's proof that failures forge unbreakable promises!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x300/00f2fe/333333?text=Dreams+And+Promise+DAP" alt="DAP Vision Image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tokenomics">
+        <div class="container">
+            <h2 class="section-title">Tokenomics: Transparent Promises</h2>
+            <div class="token-grid">
+                <div class="token-card">
+                    <h3>Total Supply</h3>
+                    <p>1.000.000.000 $DAP</p>
+                </div>
+                <div class="token-card">
+                    <h3>Promise Pool</h3>
+                    <p>30% for Child Education Donations</p>
+                </div>
+                <div class="token-card">
+                    <h3>Liquidity</h3>
+                    <p>40% Locked on Uniswap</p>
+                </div>
+                <div class="token-card">
+                    <h3>Community</h3>
+                    <p>30% Rewards & Airdrops</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap">
+        <div class="container">
+            <h2 class="section-title">Roadmap: Fulfilling the Dream</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <h3>Q4 2025: Launch the Promise</h3>
+                    <p>Token launch on Ethereum, site live, community on X/Telegram. Share the failure-to-dream story for inspiration.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q1 2026: First Promises Delivered</h3>
+                    <p>Airdrops for believers, inaugural donations to kids' schools. Build trust with full transparency.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q2 2026: Expand the Dream</h3>
+                    <p>Major exchange listings, partnerships with motivators. Add staking for social impact rewards.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q3 2026: Global Fulfillment</h3>
+                    <p>International aid programs, success-story NFTs, and moon mission: Help 1,000 kids realize their dreams!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container">
+            <h2 class="section-title">Team: Dreamers Keeping Promises</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150/4facfe/fff?text=Dreamer" alt="Founder">
+                    <h3>The Dreamer</h3>
+                    <p>Founder - Youth Full of Vision</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150/00f2fe/fff?text=Builder" alt="Builder">
+                    <h3>The Builder</h3>
+                    <p>Lead Developer - Risen from Failures</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150/4facfe/fff?text=Promiser" alt="Promiser">
+                    <h3>The Promiser</h3>
+                    <p>Social Impact Lead - Charity Focus</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Join the Promise</h2>
+            <p style="color: #fff; text-align: center; margin-bottom: 2rem;">Share your dream! Follow on X @DAPCoin or contact for collaborations.</p>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea rows="5" placeholder="Share your story or collaboration ideas" required></textarea>
+                <button type="submit">Send & Dream Together</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dreams And Promise (DAP). From dreams, promises are born. DYOR - Not financial advice.</p>
+            <p>Social: <a href="https://x.com/DAPCoin" style="color: #00f2fe;">X</a> | <a href="#" style="color: #00f2fe;">Telegram</a> | <a href="#" style="color: #00f2fe;">Discord</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Inspirational Quotes (Random in Hero)
+        const quotes = [
+            '"Failures are the seeds of dreams fulfilled with promise."',
+            '"Hold the promise: Success comes to those who dream boldly."',
+            '"One dream sparks a chain of promises for thousands."'
+        ];
+        function showRandomQuote() {
+            const quoteEl = document.getElementById('random-quote');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteEl.textContent = randomQuote;
+        }
+        showRandomQuote(); // Show on load
+        setInterval(showRandomQuote, 10000); // Change every 10s
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Form Submission (placeholder)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your message inspires us! We\'ll reply soon. Thanks for joining the promise.');
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
